@@ -1,31 +1,22 @@
 "use client";
 
-import ProtectedRoute from "@/components/ProtectedRoute";
-import { signOut } from "firebase/auth";
-import { auth } from "@/lib/firebase";
+import Link from "next/link";
 
 export default function HomePage() {
-  const handleLogout = async () => {
-    await signOut(auth);
-    window.location.href = "/login"; // or use router.push("/login") if preferred
-  };
-
   return (
-    // <ProtectedRoute>
-    //   <div className="p-10 space-y-4">
-    //     <h1 className="text-2xl font-semibold">
-    //       Welcome to the Admin Dashboard
-    //     </h1>
-    //     <button
-    //       onClick={handleLogout}
-    //       className="bg-red-600 text-white px-4 py-2 rounded"
-    //     >
-    //       Log Out
-    //     </button>
-    //   </div>
-    // </ProtectedRoute>
-    <div>
-      <h1>ADMIN DASHBOARD</h1>
+    <div className="flex flex-col items-center justify-center min-h-screen p-4 space-y-4">
+      <h1 className="text-3xl font-bold">Admin Dashboard</h1>
+      <p className="text-gray-600">This is a placeholder home screen.</p>
+      <Link href="/login">
+        <button className="bg-blue-600 text-white px-4 py-2 rounded">
+          Go to Login
+        </button>
+      </Link>
+      <Link href="/signup">
+        <button className="bg-green-600 text-white px-4 py-2 rounded">
+          Go to Sign Up
+        </button>
+      </Link>
     </div>
   );
 }
