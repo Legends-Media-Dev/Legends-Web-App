@@ -53,7 +53,7 @@ export default function DashboardPage() {
         {/* Sidebar Button for Mobile */}
         <button
         onClick={toggleSidebar}
-        classNam="lg:hidden p-4 text-white bg-blue-500"
+        className="lg:hidden p-4 text-white bg-blue-500"
         >
             <ion-icon name="menu"></ion-icon>
         </button>
@@ -79,7 +79,7 @@ export default function DashboardPage() {
           <Link href="/notifications">
             <button
               className={`w-full flex items-center space-x-2 px-4 py-3 font-medium mb-4 ${
-                router.pathname === "/notifications" ? "bg-gray-400" : ""
+                router.pathname === "/notifications" ? "bg-gray-400" : "hover:bg-gray-100"
               }`}
             >
               <ion-icon name="notifications"></ion-icon>
@@ -89,7 +89,7 @@ export default function DashboardPage() {
           <Link href="/newdrop">
             <button
               className={`w-full flex items-center space-x-2 px-4 py-3 font-medium mb-4 ${
-                router.pathname === "/newdrop" ? "bg-gray-400"  : ""
+                router.pathname === "/newdrop" ? "bg-gray-400"  : "hover:bg-gray-100"
               }`}
             >
               <ion-icon name="add-circle"></ion-icon>
@@ -99,7 +99,7 @@ export default function DashboardPage() {
           <Link href="/giveaways">
             <button
               className={`w-full flex items-center space-x-2 px-4 py-3 font-medium ${
-                router.pathname === "/giveaways" ? "bg-gray-400" : ""
+                router.pathname === "/giveaways" ? "bg-gray-400" : "hover:bg-gray-100"
               }`}
             >
               <ion-icon name="trophy"></ion-icon>

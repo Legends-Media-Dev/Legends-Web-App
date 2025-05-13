@@ -1,10 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
-import { auth } from "../lib/firebase";
-import { useEffect} from "react";
+import { signInWithEmailAndPassword, onAuthStateChanged, signInWithPopup } from "firebase/auth";
+import { auth, provider } from "../lib/firebase";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -31,6 +30,16 @@ export default function LoginPage() {
       router.push("/dashboard");
     } catch (err) {
       setError("Invalid email or password.");
+    }
+  };
+
+  const handleGoogleSignIn = async () => {
+    try {
+      await signInWithPopup(auth, provider);
+      router.push("/dashboard");
+    } catch (err) {
+      console.error("Google sign-in error:", err);
+      setError("Google sign-in failed. Try again.");
     }
   };
 
@@ -89,6 +98,22 @@ export default function LoginPage() {
             </button>
           </div>
         </form>
+
+        {/* Google Sign-In */}
+        <div className="my-6 flex justify-center">
+          <button
+          type="button"
+          onClick={handleGoogleSignIn}
+          className="w-[250px] h-[40px] bg-[#464A4F] text-white text-sm font-semibold rounded-md active:opacity-70 transition duration-150"
+          >
+            <img
+            src="/images/google_logo.png"
+            alt="Google"
+            className="w-5 h-5"
+            />
+            Sign In
+          </button>
+        </div>
       </div>
   
       {/* Right side - Image */}
