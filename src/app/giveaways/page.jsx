@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { auth } from "../../lib/firebase";
 import Link from "next/link";
+import Sidebar from "@/components/Sidebar";
 
 export default function GiveawaysPage() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -11,42 +12,7 @@ export default function GiveawaysPage() {
   return (
     <div className="flex min-h-screen bg-[#f4f7f9] text-gray-800">
       {/* Sidebar */}
-      <aside className="fixed top-0 left-0 h-screen w-64 bg-white shadow flex flex-col items-center p-6 space-y-6 z-50">
-        <img src="/images/legends_logo.png" alt="LEGENDS Logo" className="w-36 h-auto mt-4" />
-        <nav className="w-full">
-          {/* Dashboard Link */}
-          <Link href="/dashboard">
-            <button className="w-full flex items-center space-x-2 px-4 py-3 hover:bg-gray-100 font-medium mb-4">
-              <ion-icon name="grid"></ion-icon>
-              <span>Dashboard</span>
-            </button>
-          </Link>
-          
-          {/* Notifications Link */}
-          <Link href="/notifications">
-            <button className="w-full flex items-center space-x-2 px-4 py-3 hover:bg-gray-100 mb-4">
-              <ion-icon name="notifications"></ion-icon>
-              <span>Notifications</span>
-            </button>
-          </Link>
-          
-          {/* New Drop Link */}
-          <Link href="/newdrop">
-            <button className="w-full flex items-center space-x-2 px-4 py-3 hover:bg-gray-100 mb-4">
-              <ion-icon name="add-circle"></ion-icon>
-              <span>New Drop</span>
-            </button>
-          </Link>
-          
-          {/* Giveaways Link - active state */}
-          <Link href="/giveaways">
-            <button className="w-full flex items-center space-x-2 px-4 py-3 rounded bg-gray-400 font-medium mb-4">
-              <ion-icon name="trophy"></ion-icon>
-              <span>Giveaways</span>
-            </button>
-          </Link>
-        </nav>
-      </aside>
+      <Sidebar />
 
       {/* Main Content */}
       <main className="flex-1 p-8 ml-64">
