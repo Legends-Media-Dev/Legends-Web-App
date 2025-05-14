@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Sidebar from "@/components/Sidebar";
 import TopNav from "@/components/TopNav";
 
-export default function NewDropPage() {
+export default function WebsiteEventsPage() {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
   useEffect(() => {
@@ -21,7 +21,7 @@ export default function NewDropPage() {
       {/* Main Content */}
       <div className={`flex-1 transition-all duration-300 ${sidebarCollapsed ? "ml-16" : "ml-64"}`}>
         {/* Top Navigation */}
-        <TopNav title="New Drop" />
+        <TopNav title="Website Events" />
 
         {/* Content */}
         <main className="p-8 mt-[88px]">

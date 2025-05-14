@@ -23,17 +23,17 @@ export default function TopNav({ title }) {
   }, []);
 
   return (
-    <header className="fixed top-0 left-0 right-0 h-[80px] bg-white border-b border-gray-200 z-40 flex items-center justify-between px-6">
+    <header className="fixed top-0 left-0 right-0 h-[60px] bg-white border-b border-gray-200 z-40 flex items-center justify-between px-6">
       {/* Left: Icon + Page Title */}
-      <div className="flex items-center space-x-5 ">
+      <div className="flex items-center space-x-3">
         <Image
-          src="/icon.png"
+          src="/webAppLogo.png"
           alt="Legends Logo"
-          width={50}
-          height={50}
-          className="rounded-md object-contain"
+          width={36}
+          height={36}
+          className="rounded object-contain"
         />
-        <PageHeader title={title} className="mb-0" />
+        <PageHeader title={title} className="mb-0 text-lg" /> {/* Adjust font size if needed */}
       </div>
 
       {/* Right: User Dropdown */}
@@ -43,7 +43,7 @@ export default function TopNav({ title }) {
             onClick={() => setDropdownOpen(!dropdownOpen)}
             className="flex items-center space-x-2 focus:outline-none"
           >
-            <div className="w-8 h-8 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-xs">
+            <div className="w-7 h-7 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-xs">
               {user.displayName ? user.displayName.charAt(0).toUpperCase() : "U"}
             </div>
             <span className="text-sm font-medium text-gray-800">
@@ -52,13 +52,13 @@ export default function TopNav({ title }) {
           </button>
 
           {dropdownOpen && (
-            <div className="absolute right-0 mt-1 w-40 bg-white rounded-lg shadow-md z-50">
+            <div className="absolute right-0 mt-1 w-36 bg-white rounded-md shadow-md z-50">
               <button
                 onClick={async () => {
                   await auth.signOut();
                   router.push("/");
                 }}
-                className="w-full text-left px-4 py-2 text-sm text-gray-800 hover:bg-gray-100 font-medium transition"
+                className="w-full text-left px-3 py-2 text-sm text-gray-800 hover:bg-gray-100 transition"
               >
                 Log Out
               </button>

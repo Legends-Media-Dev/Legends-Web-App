@@ -11,7 +11,7 @@ export default function PageHeader({ title, className = "mb-8" }) {
 
   return (
     <div className={className}>
-      <h1 className="text-2xl font-bold">{title}</h1>
+      <h1 className="text-md font-bold">{title}</h1>
       <p className="text-sm text-gray-500">{formattedDate}</p>
     </div>
   );

@@ -9,7 +9,6 @@ import {
   IoGrid,
   IoNotifications,
   IoAddCircle,
-  IoTrophy,
 } from "react-icons/io5";
 
 export default function Sidebar({ onCollapseChange }) {
@@ -35,13 +34,12 @@ export default function Sidebar({ onCollapseChange }) {
 
   return (
     <aside
-        className={`fixed left-0 z-30 mt-[60px] h-[calc(100vh-60px)] bg-white shadow transition-all duration-300 ${
-            collapsed ? "w-16" : "w-64"
-        }`}
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
+      className={`fixed left-0 z-30 mt-[60px] h-[calc(100vh-60px)] bg-white shadow transition-all duration-300 ${
+        collapsed ? "w-16" : "w-48"
+      }`}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
     >
-
       {/* Toggle Button */}
       {(hovered || collapsed) && (
         <button
@@ -54,12 +52,6 @@ export default function Sidebar({ onCollapseChange }) {
 
       {/* Sidebar Content */}
       <div className="flex flex-col items-center pt-6">
-        {/* Logo (optional) */}
-        {/* {!collapsed && (
-          <img src="/logo.png" alt="Logo" className="w-32 h-auto mb-4" />
-        )} */}
-
-        {/* Navigation */}
         <nav className={`w-full space-y-2 ${collapsed ? "mt-8" : "mt-6 px-3"}`}>
           <SidebarLink
             href="/dashboard"
@@ -74,15 +66,9 @@ export default function Sidebar({ onCollapseChange }) {
             collapsed={collapsed}
           />
           <SidebarLink
-            href="/newdrop"
+            href="/websiteEvents"
             icon={<IoAddCircle size={20} />}
-            label="New Drop"
-            collapsed={collapsed}
-          />
-          <SidebarLink
-            href="/giveaways"
-            icon={<IoTrophy size={20} />}
-            label="Giveaways"
+            label="Website Events"
             collapsed={collapsed}
           />
         </nav>
@@ -99,7 +85,7 @@ function SidebarLink({ href, icon, label, collapsed }) {
     <Link href={href}>
       <div
         className={`flex items-center rounded-md cursor-pointer transition space-x-2 ${
-          collapsed ? "justify-center p-3 w-11 h-11 mx-auto" : "px-4 py-3 w-full"
+          collapsed ? "justify-center p-3 w-11 h-11 mx-auto" : "px-3 py-2 w-full"
         } ${
           isActive
             ? "bg-blue-100 text-blue-600 font-semibold"
