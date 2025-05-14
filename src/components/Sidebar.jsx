@@ -12,32 +12,36 @@ import {
   IoTrophy,
 } from "react-icons/io5";
 
-/**
- * Props:
- * - onCollapseChange?: (collapsed: boolean) => void
- */
 export default function Sidebar({ onCollapseChange }) {
-  const [collapsed, setCollapsed] = useState(false);
+  const [collapsed, setCollapsed] = useState(() => {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("sidebar-collapsed") === "true";
+    }
+    return false;
+  });
+
   const [hovered, setHovered] = useState(false);
 
   const toggleSidebar = () => {
     const newState = !collapsed;
     setCollapsed(newState);
-    onCollapseChange?.(newState); // Notify parent
+    localStorage.setItem("sidebar-collapsed", newState.toString());
+    onCollapseChange?.(newState);
   };
 
   useEffect(() => {
     onCollapseChange?.(collapsed);
-  }, []); // Notify parent on initial mount
+  }, [collapsed]);
 
   return (
     <aside
-      className={`fixed top-0 left-0 h-screen bg-white shadow z-50 transition-all duration-300 ${
-        collapsed ? "w-16" : "w-64"
-      }`}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+        className={`fixed left-0 z-30 mt-[60px] h-[calc(100vh-60px)] bg-white shadow transition-all duration-300 ${
+            collapsed ? "w-16" : "w-64"
+        }`}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
     >
+
       {/* Toggle Button */}
       {(hovered || collapsed) && (
         <button
@@ -48,18 +52,15 @@ export default function Sidebar({ onCollapseChange }) {
         </button>
       )}
 
-      <div className="flex flex-col items-center p-4 space-y-6">
-        {/* Logo */}
-        {!collapsed && (
-          <img
-            src="/images/legends_logo.png"
-            alt="Logo"
-            className="w-36 h-auto mt-2"
-          />
-        )}
+      {/* Sidebar Content */}
+      <div className="flex flex-col items-center pt-6">
+        {/* Logo (optional) */}
+        {/* {!collapsed && (
+          <img src="/logo.png" alt="Logo" className="w-32 h-auto mb-4" />
+        )} */}
 
-        {/* Nav */}
-        <nav className="w-full space-y-2 mt-4">
+        {/* Navigation */}
+        <nav className={`w-full space-y-2 ${collapsed ? "mt-8" : "mt-6 px-3"}`}>
           <SidebarLink
             href="/dashboard"
             icon={<IoGrid size={20} />}
@@ -97,10 +98,13 @@ function SidebarLink({ href, icon, label, collapsed }) {
   return (
     <Link href={href}>
       <div
-        className={`flex items-center px-4 py-3 rounded-md cursor-pointer transition space-x-2
-          ${collapsed ? "justify-center" : ""}
-          ${isActive ? "bg-blue-100 text-blue-600 font-semibold" : "hover:bg-gray-100 text-gray-800"}
-        `}
+        className={`flex items-center rounded-md cursor-pointer transition space-x-2 ${
+          collapsed ? "justify-center p-3 w-11 h-11 mx-auto" : "px-4 py-3 w-full"
+        } ${
+          isActive
+            ? "bg-blue-100 text-blue-600 font-semibold"
+            : "hover:bg-gray-100 text-gray-800"
+        }`}
       >
         <span className={`${isActive ? "text-blue-600" : "text-gray-600"}`}>
           {icon}
