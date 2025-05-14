@@ -12,7 +12,7 @@ import TopNav from "@/components/TopNav";
 
 import { IoPeople, IoTrendingUp, IoPersonAdd } from "react-icons/io5";
 
-export default function DashboardPage() {
+export default function AnalyticsPage() {
   const router = useRouter();
   const [loading, setLoading] = useState(true);
   const [members, setMembers] = useState([
@@ -57,7 +57,7 @@ export default function DashboardPage() {
         }`}
       >
         {/* Top Nav */}
-        <TopNav title="Dashboard" />
+        <TopNav title="Analytics" />
 
         {/* Page Content */}
         <div className="px-8 pt-10 pb-10">

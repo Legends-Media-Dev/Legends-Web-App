@@ -54,9 +54,9 @@ export default function Sidebar({ onCollapseChange }) {
       <div className="flex flex-col items-center pt-6">
         <nav className={`w-full space-y-2 ${collapsed ? "mt-8" : "mt-6 px-3"}`}>
           <SidebarLink
-            href="/dashboard"
+            href="/analytics"
             icon={<IoGrid size={20} />}
-            label="Dashboard"
+            label="Analytics"
             collapsed={collapsed}
           />
           <SidebarLink

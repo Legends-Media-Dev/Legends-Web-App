@@ -15,7 +15,7 @@ export default function LoginPage() {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        router.push("/dashboard");
+        router.push("/analytics");
       } else {
         setLoading(false);
       }
@@ -27,7 +27,7 @@ export default function LoginPage() {
     e.preventDefault();
     try {
       await signInWithEmailAndPassword(auth, email.trim(), password);
-      router.push("/dashboard");
+      router.push("/analytics");
     } catch (err) {
       setError("Invalid email or password.");
     }
@@ -36,7 +36,7 @@ export default function LoginPage() {
   const handleGoogleSignIn = async () => {
     try {
       await signInWithPopup(auth, provider);
-      router.push("/dashboard");
+      router.push("/analytics");
     } catch (err) {
       console.error("Google sign-in error:", err);
       setError("Google sign-in failed. Try again.");
