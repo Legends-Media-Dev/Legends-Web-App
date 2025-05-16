@@ -44,14 +44,14 @@ export default function Sidebar({ onCollapseChange }) {
       {(hovered || collapsed) && (
         <button
           onClick={toggleSidebar}
-          className="absolute -right-3 top-6 w-7 h-7 rounded-full bg-white border shadow-lg flex items-center justify-center border-gray-200 hover:scale-105 transition"
+          className="absolute -right-3 top-2 w-7 h-7 rounded-full bg-white border shadow-lg flex items-center justify-center border-gray-200 hover:scale-105 transition"
         >
           {collapsed ? <IoChevronForward size={14} /> : <IoChevronBack size={14} />}
         </button>
       )}
 
       {/* Sidebar Content */}
-      <div className="flex flex-col items-center pt-6">
+      <div className="flex flex-col items-center ">
         <nav className={`w-full space-y-2 ${collapsed ? "mt-8" : "mt-6 px-3"}`}>
           <SidebarLink
             href="/analytics"

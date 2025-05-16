@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { auth } from "@/lib/firebase";
 import { onAuthStateChanged } from "firebase/auth";
 
-import PageHeader from "@/components/PageHeader";
+import PageHeader from "@/components/WebsiteComponents/PageHeader";
 
 export default function TopNav({ title }) {
   const router = useRouter();

@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Sidebar from "@/components/Sidebar";
-import TopNav from "@/components/TopNav";
+import Sidebar from "@/components/WebsiteComponents/Sidebar";
+import TopNav from "@/components/WebsiteComponents/TopNav";
 
 export default function WebsiteEventsPage() {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
