@@ -19,6 +19,19 @@ export default function CreateNotificationDrawer({ isOpen, onClose }) {
     body: "",
   });
   
+  const isNextDisabled = () => {
+    if (currentStep === 0) {
+      return !formData.type;
+    }
+    if (currentStep === 1) {
+      const hasPlatforms = Array.isArray(formData.platforms) && formData.platforms.length > 0;
+      const hasTargeting = !!formData.targeting;
+      return !hasPlatforms || !hasTargeting;
+    }
+    // For other steps, enable by default (until validated)
+    return false;
+  };
+  
 
   if (!isOpen) return null;
 
@@ -84,15 +97,15 @@ export default function CreateNotificationDrawer({ isOpen, onClose }) {
             Cancel
             </button>
             <button
-                disabled={!formData.type} // disable if not selected
+                disabled={isNextDisabled()}
                 className={`px-4 py-2 text-sm font-medium rounded-md transition
-                    ${formData.type
+                    ${!isNextDisabled()
                     ? "bg-green-600 text-white hover:bg-green-700"
                     : "bg-gray-200 text-gray-500 cursor-not-allowed"}
                 `}
                 onClick={() => {
                     setCompletedSteps((prev) =>
-                        prev.includes(currentStep) ? prev : [...prev, currentStep]
+                    prev.includes(currentStep) ? prev : [...prev, currentStep]
                     );
                     setCurrentStep((prev) => Math.min(prev + 1, steps.length - 1));
                 }}

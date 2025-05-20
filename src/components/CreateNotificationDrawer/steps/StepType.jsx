@@ -35,7 +35,7 @@ export default function StepType({ formData, setFormData }) {
 
   return (
     <div className="flex flex-col gap-4">
-      <h3 className="text-sm font-medium text-gray-800">Notification Type</h3>
+      <h3 className="text-md font-bold text-black">Notification Type</h3>
 
       <div className="flex flex-col gap-3 mt-2">
         {options.map(({ key, description }) => {
@@ -45,23 +45,20 @@ export default function StepType({ formData, setFormData }) {
             <button
               key={key}
               onClick={() => handleSelect(key)}
-              className={`flex justify-between items-center border rounded-md px-4 py-3 text-left transition-all ${
-                isSelected
-                  ? "border-gray-800 bg-gray-50"
-                  : "border-gray-300 hover:border-gray-400"
-              }`}
+              className={`flex items-start gap-3 border rounded-md px-4 py-3 text-left transition-all
+                ${isSelected ? "border-blue-600 bg-blue-50" : "border-gray-300 hover:border-gray-400"}
+              `}
             >
-              <div className="flex items-center gap-3">
-                {/* Circle indicator */}
-                <div
-                  className={`w-4 h-4 rounded-full border-2 ${
-                    isSelected ? "bg-gray-800 border-gray-800" : "border-gray-400"
-                  }`}
-                />
-                <div className="flex flex-col">
-                  <span className="text-sm font-medium text-gray-800">{key}</span>
-                  <span className="text-xs text-gray-500">{description}</span>
-                </div>
+              {/* Circle indicator */}
+              <div
+                className={`w-4 h-4 rounded-full border-2 mt-1 flex-shrink-0 ${
+                  isSelected ? "bg-blue-600 border-blue-600" : "border-gray-400"
+                }`}
+              />
+
+              <div className="flex flex-col gap-1">
+                <span className="text-sm font-medium text-gray-800">{key}</span>
+                <span className="text-xs text-gray-500">{description}</span>
               </div>
             </button>
           );
