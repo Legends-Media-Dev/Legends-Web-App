@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FiX } from "react-icons/fi";
 import StepNavigation from "./StepNavigation";
 import StepPages from "./StepPages";
@@ -13,11 +13,22 @@ export default function CreateNotificationDrawer({ isOpen, onClose }) {
 
   const [formData, setFormData] = useState({
     type: null,
-    target: null,
+    platforms: [],
+    targeting: null,
+    segmentation: {
+      locations: [],
+      tags: [],
+      lastOrderDate: "",
+    },
     sendAt: null,
     title: "",
     body: "",
-  });
+  });  
+
+  useEffect(() => {
+    console.log("📦 formData updated:", formData);
+  }, [formData]);
+  
   
   const isNextDisabled = () => {
     if (currentStep === 0) {
