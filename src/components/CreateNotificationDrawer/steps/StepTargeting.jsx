@@ -1,18 +1,18 @@
 "use client";
 
-import { useState } from "react";
+import SelectableCardRadio from "@/components/SelectableCardRadio";
+import { FiCheck } from "react-icons/fi";
 
 const availableLocations = ["Los Angeles", "New York", "Chicago", "Miami"];
 const availableTags = ["active-sub", "vip-gold", "vip-silver", "vip-platinum"];
 const orderDateOptions = ["Last 7 days", "Last 30 days", "Last 90 days"];
 
 export default function StepTargeting({ formData, setFormData }) {
-  const pushUserCount = 1248; // placeholder
+  const pushUserCount = 1248;
 
   const togglePlatform = (platform) => {
     const current = formData.platforms || [];
-    const exists = current.includes(platform);
-    const updated = exists
+    const updated = current.includes(platform)
       ? current.filter((p) => p !== platform)
       : [...current, platform];
 
@@ -33,102 +33,59 @@ export default function StepTargeting({ formData, setFormData }) {
     }));
   };
 
-  const isPlatformSelected = (platform) =>
-    (formData.platforms || []).includes(platform);
-
-  const selectedSegmentation = formData.segmentation || {};
+  const selectedSegmentation = formData.segmentation || [];
 
   return (
     <div className="flex flex-col gap-6">
-      {/* Platforms */}
-      <div>
+    {/* Platforms */}
+    <div>
         <h3 className="text-md font-bold text-black mb-2">Platforms</h3>
-        <div className="flex gap-6">
-          {["Android", "iOS"].map((platform) => {
-            const selected = isPlatformSelected(platform);
+        <div className="flex gap-4">
+            {["Android", "iOS"].map((platform) => {
+            const selected = (formData.platforms || []).includes(platform);
             return (
-              <label
+                <label
                 key={platform}
                 className="flex items-center gap-2 cursor-pointer select-none"
-              >
+                >
                 <input
-                  type="checkbox"
-                  className="hidden"
-                  checked={selected}
-                  onChange={() => togglePlatform(platform)}
+                    type="checkbox"
+                    className="hidden"
+                    checked={selected}
+                    onChange={() => togglePlatform(platform)}
                 />
                 <div
-                  className={`w-4 h-4 rounded-full border-2 transition
+                    className={`w-4 h-4 border-2 flex items-center justify-center text-white text-[10px]
                     ${selected ? "bg-blue-600 border-blue-600" : "border-gray-400"}
-                  `}
-                />
-                <span className={`text-sm ${selected ? "text-blue-600" : "text-gray-600"}`}>
-                  {platform}
+                    `}
+                >
+                    {selected && <FiCheck className="w-3 h-3" />}
+                </div>
+                <span className={`text-sm ${selected ? "text-blue-600" : "text-gray-700"}`}>
+                    {platform}
                 </span>
-              </label>
+                </label>
             );
-          })}
+            })}
         </div>
-      </div>
+    </div>
 
       {/* Targeting */}
       <div>
         <h3 className="text-md font-bold text-black mb-2">Targeting</h3>
         <div className="flex gap-4">
-          {/* All Users */}
-          <button
+          <SelectableCardRadio
+            selected={formData.targeting === "all"}
             onClick={() => selectTargeting("all")}
-            className={`flex-1 border rounded-md px-4 py-3 text-left transition-all
-              ${formData.targeting === "all" ? "border-blue-600 bg-blue-50" : "border-gray-300"}
-            `}
-          >
-            <div className="flex items-start gap-3">
-              <div
-                className={`w-4 h-4 rounded-full border-2 mt-1 flex-shrink-0 ${
-                  formData.targeting === "all"
-                    ? "bg-blue-600 border-blue-600"
-                    : "border-gray-400"
-                }`}
-              />
-              <div className="flex flex-col gap-1">
-                <span className="text-sm font-medium text-gray-800">
-                  All push-enabled users
-                </span>
-                <div className="text-sm text-gray-800 font-semibold">
-                  {pushUserCount}
-                  <span className="text-xs text-gray-500 ml-2">
-                    Push-enabled users
-                  </span>
-                </div>
-              </div>
-            </div>
-          </button>
-
-          {/* Segmentation */}
-          <button
+            title="All push-enabled users"
+            description={`${pushUserCount} total users`}
+          />
+          <SelectableCardRadio
+            selected={formData.targeting === "segmentation"}
             onClick={() => selectTargeting("segmentation")}
-            className={`flex-1 border rounded-md px-4 py-3 text-left transition-all
-              ${formData.targeting === "segmentation" ? "border-blue-600 bg-blue-50" : "border-gray-300"}
-            `}
-          >
-            <div className="flex items-start gap-3">
-              <div
-                className={`w-4 h-4 rounded-full border-2 mt-1 flex-shrink-0 ${
-                  formData.targeting === "segmentation"
-                    ? "bg-blue-600 border-blue-600"
-                    : "border-gray-400"
-                }`}
-              />
-              <div className="flex flex-col gap-1">
-                <span className="text-sm font-medium text-gray-800">
-                  Use segmentation
-                </span>
-                <span className="text-xs text-gray-500 leading-snug">
-                  Send to users based on specific segmentation such as cohorts or locations.
-                </span>
-              </div>
-            </div>
-          </button>
+            title="Use segmentation"
+            description="Target by cohorts, tags, or locations"
+          />
         </div>
       </div>
 
@@ -141,29 +98,31 @@ export default function StepTargeting({ formData, setFormData }) {
               Location(s)
             </label>
             <div className="flex flex-wrap gap-2">
-                {availableLocations.map((location) => {
-                    const selected = selectedSegmentation.locations?.includes(location);
-                    return (
-                    <button
-                        key={location}
-                        type="button"
-                        onClick={() => {
-                        const current = selectedSegmentation.locations || [];
-                        const updated = selected
-                            ? current.filter((l) => l !== location)
-                            : [...current, location];
-                        updateSegmentationField("locations", updated);
-                        }}
-                        className={`px-3 py-1 rounded-full text-sm border transition
-                        ${selected
-                            ? "bg-blue-600 text-white border-blue-600"
-                            : "bg-white text-gray-700 border-gray-300 hover:bg-gray-100"}
-                        `}
-                    >
-                        {location}
-                    </button>
-                    );
-                })}
+              {availableLocations.map((location) => {
+                const selected = selectedSegmentation.locations?.includes(location);
+                return (
+                  <button
+                    key={location}
+                    type="button"
+                    onClick={() => {
+                      const current = selectedSegmentation.locations || [];
+                      const updated = selected
+                        ? current.filter((l) => l !== location)
+                        : [...current, location];
+                      updateSegmentationField("locations", updated);
+                    }}
+                    className={`px-3 py-1 rounded-full text-sm border transition
+                      ${
+                        selected
+                          ? "text-blue-600 border-blue-600 font-medium"
+                          : "bg-white text-gray-700 border-gray-300 hover:bg-gray-100"
+                      }
+                    `}
+                  >
+                    {location}
+                  </button>
+                );
+              })}
             </div>
           </div>
 
@@ -173,29 +132,31 @@ export default function StepTargeting({ formData, setFormData }) {
               User Tag(s)
             </label>
             <div className="flex flex-wrap gap-2">
-                {availableTags.map((tag) => {
-                    const selected = selectedSegmentation.tags?.includes(tag);
-                    return (
-                    <button
-                        key={tag}
-                        type="button"
-                        onClick={() => {
-                        const current = selectedSegmentation.tags || [];
-                        const updated = selected
-                            ? current.filter((t) => t !== tag)
-                            : [...current, tag];
-                        updateSegmentationField("tags", updated);
-                        }}
-                        className={`px-3 py-1 rounded-full text-sm border transition
-                        ${selected
-                            ? "bg-blue-600 text-white border-blue-600"
-                            : "bg-white text-gray-700 border-gray-300 hover:bg-gray-100"}
-                        `}
-                    >
-                        {tag}
-                    </button>
-                    );
-                })}
+              {availableTags.map((tag) => {
+                const selected = selectedSegmentation.tags?.includes(tag);
+                return (
+                  <button
+                    key={tag}
+                    type="button"
+                    onClick={() => {
+                      const current = selectedSegmentation.tags || [];
+                      const updated = selected
+                        ? current.filter((t) => t !== tag)
+                        : [...current, tag];
+                      updateSegmentationField("tags", updated);
+                    }}
+                    className={`px-3 py-1 rounded-full text-sm border transition
+                      ${
+                        selected
+                          ? "text-blue-600 border-blue-600 font-medium"
+                          : "bg-white text-gray-700 border-gray-300 hover:bg-gray-100"
+                      }
+                    `}
+                  >
+                    {tag}
+                  </button>
+                );
+              })}
             </div>
           </div>
 
