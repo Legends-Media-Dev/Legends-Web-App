@@ -143,6 +143,8 @@ export default function StepDeliveryRecurring({ formData, setFormData }) {
           ].map(({ key, title, description }) => (
             <SelectableCardRadio
               key={key}
+              name="timezoneMode"
+              value={key}
               selected={delivery.timezoneMode === key}
               onClick={() => updateDeliveryField("timezoneMode", key)}
               title={title}
@@ -175,6 +177,8 @@ export default function StepDeliveryRecurring({ formData, setFormData }) {
             ].map(({ key, title, description }) => (
               <SelectableCardRadio
                 key={key}
+                name="lateBehavior"
+                value={key}
                 selected={delivery.lateBehavior === key}
                 onClick={() => updateDeliveryField("lateBehavior", key)}
                 title={title}

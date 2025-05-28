@@ -9,7 +9,7 @@ export default function StepDelivery({ formData, setFormData }) {
         <div className="flex flex-col gap-1">
             <h3 className="text-md font-bold text-black">Delivery</h3>
             {formData.type?.toLowerCase().includes("multiple") && (
-            <p className="text-sm text-gray-500">
+            <p className="text-xs text-gray-500">
                 Select date and time for multiple message sending
             </p>
             )}

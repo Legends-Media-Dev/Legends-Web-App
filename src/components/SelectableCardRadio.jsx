@@ -20,7 +20,7 @@ export default function SelectableCardRadio({
           name={name}
           value={value}
           checked={selected}
-          onChange={onClick}
+          onChange={() => onClick(value)} // ensure value is passed
           className="w-4 h-4 text-blue-600 border-gray-300 focus:ring-blue-500"
         />
         <div>

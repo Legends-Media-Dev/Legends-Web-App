@@ -143,24 +143,36 @@ export default function StepDeliveryOneTime({ formData, setFormData }) {
         <p className="text-xs text-gray-500 mb-2">
           Set how long to retry sending if the notification initially fails.
         </p>
+
         <div className="flex items-center gap-4">
-          <input
-            type="number"
-            min={0}
-            placeholder="Days"
-            className="w-24 border border-gray-300 rounded-md px-3 py-2 text-sm placeholder-gray-400"
-            value={delivery.expireDays || ""}
-            onChange={(e) => updateDeliveryField("expireDays", e.target.value)}
-          />
-          <input
-            type="number"
-            min={0}
-            max={23}
-            placeholder="Hours"
-            className="w-24 border border-gray-300 rounded-md px-3 py-2 text-sm placeholder-gray-400"
-            value={delivery.expireHours || ""}
-            onChange={(e) => updateDeliveryField("expireHours", e.target.value)}
-          />
+        {/* Days */}
+        <div className="relative w-full max-w-[110px]">
+            <input
+                type="number"
+                min={1}
+                placeholder="1"
+                className="w-full pr-14 text-center border border-gray-300 rounded-md px-3 py-[10px] text-sm placeholder-gray-400"
+                value={delivery.expireDays || ""}
+                onChange={(e) => updateDeliveryField("expireDays", e.target.value)}
+            />
+        <span className="absolute right-3 inset-y-0 flex items-center text-sm text-gray-500 pointer-events-none">days</span>
+        </div>
+
+        {/* Hours */}
+        <div className="relative w-full max-w-[110px]">
+            <input
+                type="number"
+                min={1}
+                max={23}
+                placeholder="1"
+                className="w-full pr-14 text-center border border-gray-300 rounded-md px-3 py-[10px] text-sm placeholder-gray-400"
+                value={delivery.expireHours || ""}
+                onChange={(e) => updateDeliveryField("expireHours", e.target.value)}
+            />
+            <span className="absolute right-3 inset-y-0 flex items-center text-sm text-gray-500 pointer-events-none">
+                hours
+            </span>         
+            </div>
         </div>
       </div>
     </div>
